@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>音乐播放器</title>
+	<style>
+          /*清除*/
+			  *{
+	      margin: 0px;
+	      padding: 0px;
+
+	    }
+		 a{text-decoration:  none;}
+		 li{list-style: none;}
+	    /*公用*/
+		.fr{float:right;}
+		.fl{float:left;}
+ 		body{background:url(imgs/music.png);}
+	  
+
+	 
+         /*head*/
+         .head{
+         	height: 80px;
+         	line-height: 80px;
+        
+			 overflow: hidden;
+         }
+          .head span a{color:#ccc;font-family: Georgia;font-weight: bold;}
+           .head span a:hover{color:white;}
+		.head span.fl a{font-size: 22px;margin-left: 20px;}
+		.head span.right a{margin-right: 50px;margin-left: 10px;}
+		.head .fm{margin-right:10px}
+		/*center*/
+
+		.geci{height: 106px;overflow: hidden;width: 250px;display: inline-block;position: relative;  margin-left: 0px }
+		.gecispan{position: absolute;top:-200px;color:rgb(197,191,194);font-weight: bold }
+		.singerPicsBorder{width: 200px;height: 200px;border: 1px solid #ccc;  box-shadow: 0px 0px 35px #888888;}
+		.singerPics{width: 200px;height: 200px;}
+		div.right{position: absolute;left: 910px;top:0px;}
+		.songs:hover{cursor: pointer;}
+		.center{margin-top: 10px;margin-left:100px;position: relative;}
+		.center .left ul.songsOptionsUl li{width: 120px;height: 40px;line-height: 40px;color:rgb(197,191,194);float: left;border: 1px solid #756974;margin-right:10px;text-align: center;}
+		.center .left ul.songsOptionsUl{ overflow: hidden;}
+		.center .left ul.songsOptionsUl li:hover{color:white;border-color: white;cursor: pointer;}
+		.songsDiv{color:rgb(197,191,194);margin-top: 10px;width: 770px;height:265px}
+		.songsDiv li{height: 50px;border-top:1px solid #756974;width: 715px;line-height: 50px}
+		.songsDiv ul span{float: right;}
+		/*bottom*/
+		.bottom{margin:80px 0px 0px 4px;position: relative;}
+		audio{background-color:rgb(68,24,27) }
+		.bofangjiantou.left,.bofangjiantou.right{display: inline-block;width: 25px;height: 25px;background:url(imgs/1.png) left center no-repeat ;}
+		.bofangjiantou.right{ background:url(imgs/2.png) left center no-repeat }
+		.bofanganiu{display: inline-block;width:21px;height:29px;background:url(imgs/3.png) left center no-repeat ;margin:0 55px;position: }
+		
+
+	
+
+		.bofangjiantou2.left,.bofangjiantou2.right{display: none;width: 25px;height: 25px;background:url(imgs/1.png) left center no-repeat ;}
+		.bofangjiantou2.right{ background:url(imgs/2.png) left center no-repeat }
+		.bofanganiu22{display: none;width:21px;height:29px;background:url(imgs/3.png) left center no-repeat ;margin:0 55px;position: }
+		 .bofanganiu2{background:url(imgs/4.png) left center no-repeat ;}
+
+		.songsname{  color: rgb(171,155,155);position: absolute;left:265px;top:-8px;}
+		.jindutiao{display: inline-block;width: 450px;height: 2px;background-color: rgb(120,91,90);position: absolute;top:20px;left: 250px;}
+		.jindutiao:hover{cursor: pointer;}
+		.jindutiao i {display: inline-block;width: 15px;height: 15px;background:url(imgs/qiu.png) left center no-repeat ;position: absolute;left:0px;top:-7px;}
+
+			.jindutiao2{display: none;width: 450px;height: 2px;background-color: rgb(120,91,90);position: absolute;top:20px;left: 250px;}
+		.jindutiao2 i {display:  inline-block;width: 15px;height: 15px;background:url(imgs/qiu.png) left center no-repeat ;position: absolute;left:0px;top:-7px;}
+			.jindutiao2:hover{cursor: pointer;}
+
+
+		.time,.time2{color: rgb(171,155,155);position: absolute;left:660px;top:-10px;}
+		.time{left:623px;top:-10px;}
+
+		
+			/*fm*/
+		#fm{position: absolute;left:911px;top:1px;}
+		.songImg{width: 200px;height: 200px;display: none;}
+		.songName{color: rgb(171,155,155);position: absolute;left:265px;top:-8px;display: none;}
+		.songAuthor{color: rgb(171,155,155);position: absolute;left:285px;top:20px;display: none;}
+		.fmChannels{display: none;}
+	.fmChannels dl dd{display: inline-block; text-align: left;	 width: 132px;float: left;}
+	 	 .fmChannels dl dd:hover{cursor:pointer;color: white}
+		.center .left ul.songsOptionsUl li.widthyidian{width: 300px}
+		
+		/*file*/
+	.center .left ul.songsOptionsUl li.fileli{border: none}
+	.file{width: 300px;height: 40px;position: absolute;left:0px;opacity: 0}
+	</style>
+</head>
+<body>
+<div class="head">
+		<span class="fl"><a href="">在线音乐</a></span>
+		
+		<span class="fr right"><a href="">设置</a></span>
+		<span class="fr dengLu"><a href="">登录</a></span>
+	 
+	 
+</div>
+
+<div class="center">
+  <div class="left">
+		<ul class="songsOptionsUl">
+
+			<li class="songsOptions img-container widthyidian">load</li>
+	 			
+			<li class="songsOptionsbendi">local music</li>
+			<li class="songsOptionsFM">FM</li>
+			<li class="songsOptions fileli"><input type="file" class="file"></li>
+
+		</ul>
+		<div class="songsDiv">
+			<ul>
+				<li class="songs">你还要我怎样<span>5:10</span></li>
+				<li class="songs">后来<span>5:41</span></li>
+				<li class="songs">半壶纱<span>3:42</span></li>
+				<li class="songs">你是我今生的依靠<span>4:18</span></li>
+				<li class="songs">又见山里红<span>4:03</span></li>
+			</ul>
+			    <div class="fmChannels">
+                    <dl class="dl-0" >
+                        
+                    </dl>
+                    <dl class="dl-1">
+                      
+                    </dl>
+                    <dl class="dl-2">
+                     
+                    </dl>
+                    <dl class="dl-3">
+                     
+                    </dl>
+                    <dl class="dl-4">
+                      
+                    </dl>
+                </div>
+		</div>
+  </div>
+
+  <div class="right"><div class="singerPicsBorder"><img class="singerPics"></div> <br><div class="geci"><span class="gecispan"></span></div>
+
+
+
+</div>
+
+
+
+<div class="bottom">
+
+<span class="bofangjiantou left"></span>
+<span class="bofanganiu"></span>
+<span class="bofangjiantou right"></span>
+
+<span class="bofangjiantou2 left"></span>
+<span class="bofanganiu22"></span>
+<span class="bofangjiantou2 right"></span>
+
+<span class="time"></span>
+
+<span class="time2"></span>
+<span class="songsname"></span>
+  <p class="songName">正在加载中</p>
+  <p class="songAuthor">正在加载中</p>
+<span class="jindutiao"><i></i></span>
+<span class="jindutiao2"><i></i></span>
+</div>
+
+ 
+ <div id="fm">
+        
+              
+                        <div class="song-img"><img src="" alt="" class="songImg">
+                          
+                            
+                            </div>
+                
+                  
+                        
+                 
+                      
+   
+
+     
+    </div>
+
+ 
+
+
+
+
+
+
+<audio   src="music/1.mp3"    >
+ 
+  
+ 
+</audio>
+
+
+
+ <audio id="player"     >no support player</audio>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+var gecispan=document.getElementsByClassName("gecispan")[0] 
+var audio=document.getElementsByTagName('audio')[0] 
+var audio2=document.getElementsByTagName('audio')[1]
+ var time=document.getElementsByClassName("time")[0]
+ var bofanganiu=document.getElementsByClassName("bofanganiu")[0]
+ var time2=document.getElementsByClassName("time2")[0]
+var bottom=document.getElementsByClassName("bottom")[0]
+var singerPics=document.getElementsByClassName("singerPics")[0]
+var ball=document.getElementsByClassName("jindutiao")[0].getElementsByTagName("i")[0]
+var bofangjiantou=document.getElementsByClassName("bofangjiantou")
+var jindutiao=document.getElementsByClassName("jindutiao")[0]
+ 
+var songs=document.getElementsByClassName("songs")
+var songsname=document.getElementsByClassName("songsname")[0]
+var timer
+jindutiao.onclick=function(event){
+	  var e = event || window.event;
+       ball.style.left=event.clientX-354+"px"
+       // 设置currentTime
+
+  clearInterval(timer)
+        for (var i=0;i<6;i++){
+        if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+                        switch(i)
+                            {
+                            case 1:
+                           
+                            clearInterval(timer)
+                            audio.pause()
+                             audio.currentTime=(event.clientX-354)/449*audio.duration
+                             audio.play()
+                             timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+
+		gecispan.style.top="-"+audio.currentTime/audio.duration*gecispan.offsetHeight+"px" },10)
+                             bofanganiu.className="bofanganiu bofanganiu2"
+                             songsname.innerHTML="你还要我怎样"
+							singerPics.src="imgs/xue.png"
+							gecispan.innerHTML="<p>"+"<br>你还要我怎样<br>词：薛之谦 曲：薛之谦 <br>演唱：薛之谦 <br>你停在了这条我们熟悉的街 <br>把你准备好的台词全念一遍 <br>我还在逞强 说着谎 <br>也没能力遮挡 你去的方向 <br>至少分开的时候我落落大方 <br>我后来都会选择绕过那条街 <br>又多希望在另一条街能遇见 <br>思念在逞强 不肯忘 <br>怪我没能力跟随 你去的方向 <br>若越爱越被动 越要落落大方 <br>你还要我怎样 要怎样 <br>你突然来的短信就够我悲伤 <br>我没能力遗忘 你不用提醒我 <br>哪怕结局就这样 <br>我还能怎样 能怎样 <br>最后还不是落得情人的立场 <br>你从来不会想 我何必这样 <br>我慢慢的回到自己的生活圈 <br>也开始可以接触新的人选 <br>爱你到最后 不痛不痒 <br>留言在计较 谁爱过一场 <br>我剩下一张 没后悔的模样 <br>你还要我怎样 要怎样 <br>你千万不要在我婚礼的现场 <br>我听完你爱的歌 就上了车 <br>爱过你很值得 <br>我不要你怎样 没怎样 <br>我陪你走的路你不能忘 <br>因为那是我 最快乐的时光 <br>后来我的生活还算理想 <br>没为你落到孤单的下场 <br>有一天晚上 梦一场 <br>你白发苍苍 说带我流浪 <br>我还是没犹豫 就随你去天堂 <br>不管能怎样 我能陪你到天"+"</p>"
+
+                              break;
+                            case 2:
+                            clearInterval(timer)
+                            audio.pause()
+                             audio.currentTime=(event.clientX-354)/449*audio.duration
+                             audio.play()
+                             timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+        console.log(gecispan.offsetHeight)
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" },10)
+                              break;
+                             case 3:
+                            clearInterval(timer)
+                            audio.pause()
+                             audio.currentTime=(event.clientX-354)/449*audio.duration
+                             audio.play()
+                             timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+
+		gecispan.style.top="-"+audio.currentTime/audio.duration*gecispan.offsetHeight+"px" },10)
+
+                              break;
+                              case 4:
+                             clearInterval(timer)
+                            audio.pause()
+                             audio.currentTime=(event.clientX-354)/449*audio.duration
+                             audio.play()
+                             timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+
+		gecispan.style.top="-"+audio.currentTime/audio.duration*gecispan.offsetHeight+"px" },10)
+
+                              break;
+                              case 5:
+                           clearInterval(timer)
+                            audio.pause()
+                             audio.currentTime=(event.clientX-354)/449*audio.duration
+                             audio.play()
+                             timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+
+		gecispan.style.top="-"+audio.currentTime/audio.duration*gecispan.offsetHeight+"px" },10)
+
+                              break;
+                            }
+            
+        }
+     }
+
+
+
+
+}
+
+
+for (var i=0;i<bottom.childNodes.length;i++){
+ console.log(bottom.childNodes[i].className)
+if(typeof(bottom.childNodes[i].className)=="undefined")
+	{continue}
+if(bottom.childNodes[i].className.indexOf("bofanganiu")==0)
+	{ bottom.childNodes[i].onclick=function(){
+		if(this.className.indexOf(2)==-1)
+			{audio.play();
+				clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+							case 1:
+							songsname.innerHTML="你还要我怎样"
+							singerPics.src="imgs/xue.png"
+							gecispan.innerHTML="<p>"+"<br>你还要我怎样<br>词：薛之谦 曲：薛之谦 <br>演唱：薛之谦 <br>你停在了这条我们熟悉的街 <br>把你准备好的台词全念一遍 <br>我还在逞强 说着谎 <br>也没能力遮挡 你去的方向 <br>至少分开的时候我落落大方 <br>我后来都会选择绕过那条街 <br>又多希望在另一条街能遇见 <br>思念在逞强 不肯忘 <br>怪我没能力跟随 你去的方向 <br>若越爱越被动 越要落落大方 <br>你还要我怎样 要怎样 <br>你突然来的短信就够我悲伤 <br>我没能力遗忘 你不用提醒我 <br>哪怕结局就这样 <br>我还能怎样 能怎样 <br>最后还不是落得情人的立场 <br>你从来不会想 我何必这样 <br>我慢慢的回到自己的生活圈 <br>也开始可以接触新的人选 <br>爱你到最后 不痛不痒 <br>留言在计较 谁爱过一场 <br>我剩下一张 没后悔的模样 <br>你还要我怎样 要怎样 <br>你千万不要在我婚礼的现场 <br>我听完你爱的歌 就上了车 <br>爱过你很值得 <br>我不要你怎样 没怎样 <br>我陪你走的路你不能忘 <br>因为那是我 最快乐的时光 <br>后来我的生活还算理想 <br>没为你落到孤单的下场 <br>有一天晚上 梦一场 <br>你白发苍苍 说带我流浪 <br>我还是没犹豫 就随你去天堂 <br>不管能怎样 我能陪你到天"+"</p>"
+							  break;
+							case 2:
+							songsname.innerHTML="后来"
+								singerPics.src="imgs/liu.png"
+								gecispan.innerHTML="<p>"+" 后来<br>演唱：刘若英<br>后来<br>我总算学会了如何去爱<br>可是你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不在<br>栀子花 白花瓣<br>落在我蓝色百褶裙上<br>爱你 你轻声说<br>我低下头闻见一阵芬芳<br>那个永恒的夜晚<br>十七岁仲夏<br>你吻我的那个夜晚<br>让我往后的时光<br>每当有感叹<br>总想起当天的星光<br>那时候的爱情<br>为什么就能那样简单<br>而又是为什么人年少时<br>一定要让深爱的人受伤<br>在这相似的深夜里<br>你是否一样<br>也在静静追悔感伤<br>如果当时我们能不那么倔强<br>现在也不那么遗憾<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>永远不会再重来<br>有一个男孩爱着那个女"+"</p>"
+							  break;
+							 case 3:
+							songsname.innerHTML="半壶纱"
+									singerPics.src="imgs/liuke.png"
+									gecispan.innerHTML="<p>"+"半壶纱 - 刘珂矣<br>词：刘珂矣&百慕三石<br> 曲：刘珂矣&百慕三石<br> 编曲：百慕三石<br>墨已入水渡一池青花<br>揽五分红霞采竹回家<br>悠悠风来 埋一地桑麻<br>一身袈裟 把相思放下<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>倘若我心中的山水 你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘了<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘<br>"+"</p>"
+							  break;
+							  case 4:
+							songsname.innerHTML="你是我今生的依靠"
+									singerPics.src="imgs/yang.png"
+									gecispan.innerHTML="<p>"+"你是我今生的依靠<br>词曲：秀才 <br>编曲：关键 <br>录音：付威 <br>混音：王路遥 <br>演唱：冷漠 杨小曼 <br>出品人：冷漠 <br>时常在想你对我的好 <br>在谁的身上都找不到 <br>于是总在心底把它记牢 <br>当做是你送我的宝 <br>努力付出不奢求回报 <br>幸福要用时间来熬 <br>生活的压力我们一起挑 <br>只要有你在身边就好 <br>相信你是我今生的依靠 <br>谢谢你给予我的好 <br>曾经走过的路有苦有笑 <br>你是我的唯一是我的依靠 <br>相信你是我今生的依靠 <br>我愿意一生陪你到老<br>无论爱有多苦幸福多难寻找<br>我也无怨无悔陪你到天涯海角<br>"+"</p>"
+							  break;
+							  case 5:
+							songsname.innerHTML="又见山里红"
+									singerPics.src="imgs/qi.png"
+									gecispan.innerHTML="<p>"+"又见山里红<br>词曲：刘海东 <br>演唱：祁隆 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情< <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月  <br>融化在我心中 <br>你把燃烧的岁月 <br>融化在我心中<br>"+"</p>"
+							  break;
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+				bofanganiu.className="bofanganiu bofanganiu2"
+		 }
+		else{clearInterval(timer)
+				clearInterval(fmTimer)
+			audio.pause();
+	 bofanganiu.className="bofanganiu"
+		}
+		 
+	}
+	 
+
+	}
+	 
+ 
+			bofangjiantou[1].onclick=function(){
+				clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+							case 1:
+							songsname.innerHTML="你还要我怎样"
+							singerPics.src="imgs/xue.png"
+							gecispan.innerHTML="<p>"+"<br>你还要我怎样<br>词：薛之谦 曲：薛之谦 <br>演唱：薛之谦 <br>你停在了这条我们熟悉的街 <br>把你准备好的台词全念一遍 <br>我还在逞强 说着谎 <br>也没能力遮挡 你去的方向 <br>至少分开的时候我落落大方 <br>我后来都会选择绕过那条街 <br>又多希望在另一条街能遇见 <br>思念在逞强 不肯忘 <br>怪我没能力跟随 你去的方向 <br>若越爱越被动 越要落落大方 <br>你还要我怎样 要怎样 <br>你突然来的短信就够我悲伤 <br>我没能力遗忘 你不用提醒我 <br>哪怕结局就这样 <br>我还能怎样 能怎样 <br>最后还不是落得情人的立场 <br>你从来不会想 我何必这样 <br>我慢慢的回到自己的生活圈 <br>也开始可以接触新的人选 <br>爱你到最后 不痛不痒 <br>留言在计较 谁爱过一场 <br>我剩下一张 没后悔的模样 <br>你还要我怎样 要怎样 <br>你千万不要在我婚礼的现场 <br>我听完你爱的歌 就上了车 <br>爱过你很值得 <br>我不要你怎样 没怎样 <br>我陪你走的路你不能忘 <br>因为那是我 最快乐的时光 <br>后来我的生活还算理想 <br>没为你落到孤单的下场 <br>有一天晚上 梦一场 <br>你白发苍苍 说带我流浪 <br>我还是没犹豫 就随你去天堂 <br>不管能怎样 我能陪你到天"+"</p>"
+							  break;
+							case 2:
+							songsname.innerHTML="后来"
+								singerPics.src="imgs/liu.png"
+								gecispan.innerHTML="<p>"+" 后来<br>演唱：刘若英<br>后来<br>我总算学会了如何去爱<br>可是你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不在<br>栀子花 白花瓣<br>落在我蓝色百褶裙上<br>爱你 你轻声说<br>我低下头闻见一阵芬芳<br>那个永恒的夜晚<br>十七岁仲夏<br>你吻我的那个夜晚<br>让我往后的时光<br>每当有感叹<br>总想起当天的星光<br>那时候的爱情<br>为什么就能那样简单<br>而又是为什么人年少时<br>一定要让深爱的人受伤<br>在这相似的深夜里<br>你是否一样<br>也在静静追悔感伤<br>如果当时我们能不那么倔强<br>现在也不那么遗憾<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>永远不会再重来<br>有一个男孩爱着那个女"+"</p>"
+							  break;
+							 case 3:
+							songsname.innerHTML="半壶纱"
+									singerPics.src="imgs/liuke.png"
+									gecispan.innerHTML="<p>"+"半壶纱 - 刘珂矣<br>词：刘珂矣&百慕三石<br>曲：刘珂矣&百慕三石<br>编曲：百慕三石<br>墨已入水渡一池青花<br>揽五分红霞采竹回家<br>悠悠风来 埋一地桑麻<br><br>一身袈裟 把相思放下<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br><br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br><br>我便一步一莲花祈祷<br>怎知那浮生一片草<br><br>岁月催人老<br>风月花鸟 一笑尘缘了<br>倘若我心中的山水 你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘了<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘<br>"+"</p>"
+							  break;
+							  case 4:
+							songsname.innerHTML="你是我今生的依靠"
+									singerPics.src="imgs/yang.png"
+									gecispan.innerHTML="<p>"+"你是我今生的依靠<br>词曲：秀才 <br>编曲：关键 <br>录音：付威 <br>混音：王路遥 <br>演唱：冷漠 杨小曼 <br>出品人：冷漠 <br>时常在想你对我的好 <br>在谁的身上都找不到 <br>于是总在心底把它记牢 <br>当做是你送我的宝 <br>努力付出不奢求回报 <br>幸福要用时间来熬 <br>生活的压力我们一起挑 <br>只要有你在身边就好 <br>相信你是我今生的依靠 <br>谢谢你给予我的好 <br>曾经走过的路有苦有笑 <br>你是我的唯一是我的依靠 <br>相信你是我今生的依靠 <br>我愿意一生陪你到老<br>无论爱有多苦幸福多难寻找<br>我也无怨无悔陪你到天涯海角<br>"+"</p>"
+							  break;
+							  case 5:
+							songsname.innerHTML="又见山里红"
+									singerPics.src="imgs/qi.png"
+									gecispan.innerHTML="<p>"+"又见山里红<br>词曲：刘海东 <br>演唱：祁隆 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情< <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月  <br>融化在我心中 <br>你把燃烧的岁月 <br>融化在我心中<br>"+"</p>"
+							  break;
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+				var cue1=audio.src.indexOf("music/1.mp3")
+				 var cue2=audio.src.indexOf("music/2.mp3") 
+				 var cue3=audio.src.indexOf("music/3.mp3") 
+				 var cue4=audio.src.indexOf("music/4.mp3") 
+				 var cue5=audio.src.indexOf("music/5.mp3") 
+				 if (cue1!=-1) {
+				 	  audio.src="music/2.mp3"
+					audio.play()
+				 }
+				 if (cue2!=-1) {
+				 	  audio.src="music/3.mp3"
+					audio.play()
+				 }
+
+				 if (cue3!=-1) {
+				 	  audio.src="music/4.mp3"
+					audio.play()
+				 }
+				 if (cue4!=-1) {
+				 	  audio.src="music/5.mp3"
+					audio.play()
+				 }
+				 if (cue5!=-1) {
+				 	  audio.src="music/1.mp3"
+					audio.play()
+				 }
+
+
+
+
+			 
+  
+			
+			bofanganiu.className="bofanganiu bofanganiu2"
+
+			 
+		}
+
+ 
+			bofangjiantou[0].onclick=function(){
+				clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+							case 1:
+							songsname.innerHTML="你还要我怎样"
+							singerPics.src="imgs/xue.png"
+							gecispan.innerHTML="<p>"+"<br>你还要我怎样<br>词：薛之谦 曲：薛之谦 <br>演唱：薛之谦 <br>你停在了这条我们熟悉的街 <br>把你准备好的台词全念一遍 <br>我还在逞强 说着谎 <br>也没能力遮挡 你去的方向 <br>至少分开的时候我落落大方 <br>我后来都会选择绕过那条街 <br>又多希望在另一条街能遇见 <br>思念在逞强 不肯忘 <br>怪我没能力跟随 你去的方向 <br>若越爱越被动 越要落落大方 <br>你还要我怎样 要怎样 <br>你突然来的短信就够我悲伤 <br>我没能力遗忘 你不用提醒我 <br>哪怕结局就这样 <br>我还能怎样 能怎样 <br>最后还不是落得情人的立场 <br>你从来不会想 我何必这样 <br>我慢慢的回到自己的生活圈 <br>也开始可以接触新的人选 <br>爱你到最后 不痛不痒 <br>留言在计较 谁爱过一场 <br>我剩下一张 没后悔的模样 <br>你还要我怎样 要怎样 <br>你千万不要在我婚礼的现场 <br>我听完你爱的歌 就上了车 <br>爱过你很值得 <br>我不要你怎样 没怎样 <br>我陪你走的路你不能忘 <br>因为那是我 最快乐的时光 <br>后来我的生活还算理想 <br>没为你落到孤单的下场 <br>有一天晚上 梦一场 <br>你白发苍苍 说带我流浪 <br>我还是没犹豫 就随你去天堂 <br>不管能怎样 我能陪你到天"+"</p>"
+							  break;
+							case 2:
+							songsname.innerHTML="后来"
+								singerPics.src="imgs/liu.png"
+								gecispan.innerHTML="<p>"+" 后来<br>演唱：刘若英<br>后来<br>我总算学会了如何去爱<br>可是你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不在<br>栀子花 白花瓣<br>落在我蓝色百褶裙上<br>爱你 你轻声说<br>我低下头闻见一阵芬芳<br>那个永恒的夜晚<br>十七岁仲夏<br>你吻我的那个夜晚<br>让我往后的时光<br>每当有感叹<br>总想起当天的星光<br>那时候的爱情<br>为什么就能那样简单<br>而又是为什么人年少时<br>一定要让深爱的人受伤<br>在这相似的深夜里<br>你是否一样<br>也在静静追悔感伤<br>如果当时我们能不那么倔强<br>现在也不那么遗憾<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>永远不会再重来<br>有一个男孩爱着那个女"+"</p>"
+							  break;
+							 case 3:
+							songsname.innerHTML="半壶纱"
+									singerPics.src="imgs/liuke.png"
+									gecispan.innerHTML="<p>"+"半壶纱 - 刘珂矣<br>词：刘珂矣&百慕三石<br>曲：刘珂矣&百慕三石<br>编曲：百慕三石<br>墨已入水渡一池青花<br>揽五分红霞采竹回家<br>悠悠风来 埋一地桑麻<br>一身袈裟 把相思放下<br><br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br><br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>倘若我心中的山水 你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘了<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘<br>"+"</p>"
+							  break;
+							  case 4:
+							songsname.innerHTML="你是我今生的依靠"
+									singerPics.src="imgs/yang.png"
+									gecispan.innerHTML="<p>"+"你是我今生的依靠<br>词曲：秀才 <br>编曲：关键 <br>录音：付威 <br>混音：王路遥 <br>演唱：冷漠 杨小曼 <br>出品人：冷漠 <br>时常在想你对我的好 <br>在谁的身上都找不到 <br>于是总在心底把它记牢 <br>当做是你送我的宝 <br>努力付出不奢求回报 <br>幸福要用时间来熬 <br>生活的压力我们一起挑 <br>只要有你在身边就好 <br>相信你是我今生的依靠 <br>谢谢你给予我的好 <br>曾经走过的路有苦有笑 <br>你是我的唯一是我的依靠 <br>相信你是我今生的依靠 <br>我愿意一生陪你到老<br>无论爱有多苦幸福多难寻找<br>我也无怨无悔陪你到天涯海角<br>"+"</p>"
+							  break;
+							  case 5:
+							songsname.innerHTML="又见山里红"
+									singerPics.src="imgs/qi.png"
+									gecispan.innerHTML="<p>"+"又见山里红<br>词曲：刘海东 <br>演唱：祁隆 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情< <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月  <br>融化在我心中 <br>你把燃烧的岁月 <br>融化在我心中<br>"+"</p>"
+							  break;
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+					var cue1=audio.src.indexOf("music/1.mp3")
+				 var cue2=audio.src.indexOf("music/2.mp3") 
+				 var cue3=audio.src.indexOf("music/3.mp3") 
+				 var cue4=audio.src.indexOf("music/4.mp3") 
+				 var cue5=audio.src.indexOf("music/5.mp3") 
+				 if (cue1!=-1) {
+				 	  audio.src="music/5.mp3"
+					audio.play()
+				 }
+				 if (cue2!=-1) {
+				 	  audio.src="music/1.mp3"
+					audio.play()
+				 }
+
+				 if (cue3!=-1) {
+				 	  audio.src="music/2.mp3"
+					audio.play()
+				 }
+				 if (cue4!=-1) {
+				 	  audio.src="music/3.mp3"
+					audio.play()
+				 }
+				 if (cue5!=-1) {
+				 	  audio.src="music/4.mp3"
+					audio.play()
+				 }
+			bofanganiu.className="bofanganiu bofanganiu2"
+
+		}
+		 
+
+
+
+ }
+ 
+
+
+
+
+
+for( var i=1;i<songs.length+1;i++){
+						switch(i)
+							{
+							case 1:
+							songs[i-1].onclick=function(){
+								audio.src="music/1.mp3"
+						     audio.play()
+						     bofanganiu.className="bofanganiu bofanganiu2"
+						     clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+							case 1:
+							songsname.innerHTML="你还要我怎样"
+							singerPics.src="imgs/xue.png"
+							gecispan.innerHTML="<p>"+"<br>你还要我怎样<br>词：薛之谦 曲：薛之谦 <br>演唱：薛之谦 <br>你停在了这条我们熟悉的街 <br>把你准备好的台词全念一遍 <br>我还在逞强 说着谎 <br>也没能力遮挡 你去的方向 <br>至少分开的时候我落落大方 <br>我后来都会选择绕过那条街 <br>又多希望在另一条街能遇见 <br>思念在逞强 不肯忘 <br>怪我没能力跟随 你去的方向 <br>若越爱越被动 越要落落大方 <br>你还要我怎样 要怎样 <br>你突然来的短信就够我悲伤 <br>我没能力遗忘 你不用提醒我 <br>哪怕结局就这样 <br>我还能怎样 能怎样 <br>最后还不是落得情人的立场 <br>你从来不会想 我何必这样 <br>我慢慢的回到自己的生活圈 <br>也开始可以接触新的人选 <br>爱你到最后 不痛不痒 <br>留言在计较 谁爱过一场 <br>我剩下一张 没后悔的模样 <br>你还要我怎样 要怎样 <br>你千万不要在我婚礼的现场 <br>我听完你爱的歌 就上了车 <br>爱过你很值得 <br>我不要你怎样 没怎样 <br>我陪你走的路你不能忘 <br>因为那是我 最快乐的时光 <br>后来我的生活还算理想 <br>没为你落到孤单的下场 <br>有一天晚上 梦一场 <br>你白发苍苍 说带我流浪 <br>我还是没犹豫 就随你去天堂 <br>不管能怎样 我能陪你到天"+"</p>"
+							  break;
+							 
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+								}
+							  break;
+							case 2:
+							songs[i-1].onclick=function(){
+								audio.src="music/2.mp3"
+								bofanganiu.className="bofanganiu bofanganiu2"
+								clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+						 
+							case 2:
+							songsname.innerHTML="后来"
+								singerPics.src="imgs/liu.png"
+								gecispan.innerHTML="<p>"+" 后来<br>演唱：刘若英<br>后来<br>我总算学会了如何去爱<br>可是你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不在<br>栀子花 白花瓣<br>落在我蓝色百褶裙上<br>爱你 你轻声说<br>我低下头闻见一阵芬芳<br>那个永恒的夜晚<br>十七岁仲夏<br>你吻我的那个夜晚<br>让我往后的时光<br>每当有感叹<br>总想起当天的星光<br>那时候的爱情<br>为什么就能那样简单<br>而又是为什么人年少时<br>一定要让深爱的人受伤<br>在这相似的深夜里<br>你是否一样<br>也在静静追悔感伤<br>如果当时我们能不那么倔强<br>现在也不那么遗憾<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>永远不会再重来<br>有一个男孩爱着那个女"+"</p>"
+							  break;
+							 
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+						     audio.play()}
+
+							  break;
+
+							 case 3:
+								songs[i-1].onclick=function(){
+								audio.src="music/3.mp3"
+								  bofanganiu.className="bofanganiu bofanganiu2"
+								  clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+							 
+							 case 3:
+							songsname.innerHTML="半壶纱"
+									singerPics.src="imgs/liuke.png"
+									gecispan.innerHTML="<p>"+"半壶纱 - 刘珂矣<br>词：刘珂矣&百慕三石<br>曲：刘珂矣&百慕三石<br>编曲：百慕三石<br>墨已入水渡一池青花<br>揽五分红霞采竹回家<br>悠悠风来 埋一地桑麻<br>一身袈裟 把相思放下<br><br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br><br>你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br><br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>倘若我心中的山水 你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘了<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘<br>"+"</p>"
+							  break;
+							 
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+						     audio.play()}
+							  break;
+							  case 4:
+								songs[i-1].onclick=function(){
+								audio.src="music/4.mp3"
+								  bofanganiu.className="bofanganiu bofanganiu2"
+								  clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+						 
+							  case 4:
+							songsname.innerHTML="你是我今生的依靠"
+									singerPics.src="imgs/yang.png"
+									gecispan.innerHTML="<p>"+"你是我今生的依靠<br>词曲：秀才 <br>编曲：关键 <br>录音：付威 <br>混音：王路遥 <br>演唱：冷漠 杨小曼 <br>出品人：冷漠 <br>时常在想你对我的好 <br>在谁的身上都找不到 <br>于是总在心底把它记牢 <br>当做是你送我的宝 <br>努力付出不奢求回报 <br>幸福要用时间来熬 <br>生活的压力我们一起挑 <br>只要有你在身边就好 <br>相信你是我今生的依靠 <br>谢谢你给予我的好 <br>曾经走过的路有苦有笑 <br>你是我的唯一是我的依靠 <br>相信你是我今生的依靠 <br>我愿意一生陪你到老<br>无论爱有多苦幸福多难寻找<br>我也无怨无悔陪你到天涯海角<br>"+"</p>"
+							  break;
+							 
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+						     audio.play()}
+							  break;
+							  case 5:
+								songs[i-1].onclick=function(){
+								audio.src="music/5.mp3"
+								  bofanganiu.className="bofanganiu bofanganiu2"
+								  clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+							 
+							  case 5:
+							songsname.innerHTML="又见山里红"
+									singerPics.src="imgs/qi.png"
+									gecispan.innerHTML="<p>"+"又见山里红<br>词曲：刘海东 <br>演唱：祁隆 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情< <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月  <br>融化在我心中 <br>你把燃烧的岁月 <br>融化在我心中<br>"+"</p>"
+							  break;
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+						     audio.play()}
+							  break;
+							}
+	
+}
+var	fmTimer
+var songImg=document.getElementsByClassName("songImg")[0]
+ 
+var singerPics=document.getElementsByClassName("singerPics")[0]
+var geci=document.getElementsByClassName("geci")[0]
+var songsname=document.getElementsByClassName("songsname")[0]
+var player=document.getElementById("player") 
+var songName=document.getElementsByClassName("songName")[0]
+var songAuthor=document.getElementsByClassName("songAuthor")[0]
+var songsDiv=document.getElementsByClassName("songsDiv")[0]
+ var songsDivUl=songsDiv.getElementsByTagName("ul")[0]
+ var fmChannels=document.getElementsByClassName("fmChannels")[0]
+ var songsOptionsFM=document.getElementsByClassName("songsOptionsFM")[0]
+var bofangjiantou=document.getElementsByClassName("bofangjiantou")
+ 	var bofanganiu=document.getElementsByClassName("bofanganiu")[0]
+ 	var songsOptionsbendi=document.getElementsByClassName("songsOptionsbendi")[0]
+ 	var bofangjiantou2=document.getElementsByClassName("bofangjiantou2")
+ 	var bofanganiu22=document.getElementsByClassName("bofanganiu22")[0]
+ var  jindutiao2=document.getElementsByClassName("jindutiao2")[0]
+ var jindutiao2i=jindutiao2.getElementsByTagName("i")[0]
+ var dengLu=document.getElementsByClassName("dengLu")[0]
+ var dengLujiemian=document.getElementsByClassName("dengLujiemian")[0]
+ var dengLujiemianText=document.getElementsByClassName("dengLujiemianText")[0]
+  var dengLujiemianButton=document.getElementsByClassName("dengLujiemianButton")[0]			
+ 
+			 songsOptionsbendi.onclick=function(){
+			 			clearInterval(timer)
+			 			jindutiao2.style.display="none"
+			 			jindutiao.style.display="inline-block"
+				clearInterval(fmTimer)
+			 	player.pause()
+			 		if(bofanganiu.className=="bofanganiu"){
+					audio.pause()
+				}else if(bofanganiu.className=="bofanganiu bofanganiu2")
+				{clearInterval(timer)
+				clearInterval(fmTimer)
+				 timer=setInterval(function(){time.innerHTML=
+ 	Math.floor(audio.currentTime/60)+":"+(audio.currentTime%60/100).toFixed(2).slice(-2);
+		time2.innerHTML="/"+Math.floor( audio.duration/60)+":"+( audio.duration%60/100).toFixed(2).slice(-2);
+		ball.style.left=audio.currentTime/audio.duration*450+"px";
+		gecispan.style.top="-"+(audio.currentTime/audio.duration*gecispan.offsetHeight+10)+"px" ;
+
+			 for (var i=0;i<6;i++){
+	 	if(audio.src.indexOf("music/"+i+".mp3")!=-1){
+	 					switch(i)
+							{
+							case 1:
+							songsname.innerHTML="你还要我怎样"
+							singerPics.src="imgs/xue.png"
+							gecispan.innerHTML="<p>"+"<br>你还要我怎样<br>词：薛之谦 曲：薛之谦 <br>演唱：薛之谦 <br>你停在了这条我们熟悉的街 <br>把你准备好的台词全念一遍 <br>我还在逞强 说着谎 <br>也没能力遮挡 你去的方向 <br>至少分开的时候我落落大方 <br>我后来都会选择绕过那条街 <br>又多希望在另一条街能遇见 <br>思念在逞强 不肯忘 <br>怪我没能力跟随 你去的方向 <br>若越爱越被动 越要落落大方 <br>你还要我怎样 要怎样 <br>你突然来的短信就够我悲伤 <br>我没能力遗忘 你不用提醒我 <br>哪怕结局就这样 <br>我还能怎样 能怎样 <br>最后还不是落得情人的立场 <br>你从来不会想 我何必这样 <br>我慢慢的回到自己的生活圈 <br>也开始可以接触新的人选 <br>爱你到最后 不痛不痒 <br>留言在计较 谁爱过一场 <br>我剩下一张 没后悔的模样 <br>你还要我怎样 要怎样 <br>你千万不要在我婚礼的现场 <br>我听完你爱的歌 就上了车 <br>爱过你很值得 <br>我不要你怎样 没怎样 <br>我陪你走的路你不能忘 <br>因为那是我 最快乐的时光 <br>后来我的生活还算理想 <br>没为你落到孤单的下场 <br>有一天晚上 梦一场 <br>你白发苍苍 说带我流浪 <br>我还是没犹豫 就随你去天堂 <br>不管能怎样 我能陪你到天"+"</p>"
+							  break;
+							case 2:
+							songsname.innerHTML="后来"
+								singerPics.src="imgs/liu.png"
+								gecispan.innerHTML="<p>"+" 后来<br>演唱：刘若英<br>后来<br>我总算学会了如何去爱<br>可是你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不在<br>栀子花 白花瓣<br>落在我蓝色百褶裙上<br>爱你 你轻声说<br>我低下头闻见一阵芬芳<br>那个永恒的夜晚<br>十七岁仲夏<br>你吻我的那个夜晚<br>让我往后的时光<br>每当有感叹<br>总想起当天的星光<br>那时候的爱情<br>为什么就能那样简单<br>而又是为什么人年少时<br>一定要让深爱的人受伤<br>在这相似的深夜里<br>你是否一样<br>也在静静追悔感伤<br>如果当时我们能不那么倔强<br>现在也不那么遗憾<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>你都如何回忆我<br>带着笑或是很沉默<br>这些年来有没有人能让你不寂寞<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>后来<br>我总算学会了如何去爱<br>可惜你早已远去<br>消失在人海<br>后来<br>终于在眼泪中明白<br>有些人一旦错过就不再<br>永远不会再重来<br>有一个男孩爱着那个女"+"</p>"
+							  break;
+							 case 3:
+							songsname.innerHTML="半壶纱"
+									singerPics.src="imgs/liuke.png"
+									gecispan.innerHTML="<p>"+"半壶纱 - 刘珂矣<br>词：刘珂矣&百慕三石<br>曲：刘珂矣&百慕三石<br>编曲：百慕三石<br>墨已入水渡一池青花<br>揽五分红霞采竹回家<br>悠悠风来 埋一地桑麻<br>一身袈裟 把相思放下<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>十里桃花待嫁的年华<br>凤冠的珍珠 挽进头发<br>檀香拂过玉镯弄轻纱<br>空留一盏 芽色的清茶<br>倘若我心中的山水<br>你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草<br>岁月催人老<br>风月花鸟 一笑尘缘了<br>倘若我心中的山水 你眼中都看到<br>我便一步一莲花祈祷<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘了<br>怎知那浮生一片草 岁月催人老<br>风月花鸟 一笑尘缘<br>"+"</p>"
+							  break;
+							  case 4:
+							songsname.innerHTML="你是我今生的依靠"
+									singerPics.src="imgs/yang.png"
+									gecispan.innerHTML="<p>"+"你是我今生的依靠<br>词曲：秀才 <br>编曲：关键 <br>录音：付威 <br>混音：王路遥 <br>演唱：冷漠 杨小曼 <br>出品人：冷漠 <br>时常在想你对我的好 <br>在谁的身上都找不到 <br>于是总在心底把它记牢 <br>当做是你送我的宝 <br>努力付出不奢求回报 <br>幸福要用时间来熬 <br>生活的压力我们一起挑 <br>只要有你在身边就好 <br>相信你是我今生的依靠 <br>谢谢你给予我的好 <br>曾经走过的路有苦有笑 <br>你是我的唯一是我的依靠 <br>相信你是我今生的依靠 <br>我愿意一生陪你到老<br>无论爱有多苦幸福多难寻找<br>我也无怨无悔陪你到天涯海角<br>"+"</p>"
+							  break;
+							  case 5:
+							songsname.innerHTML="又见山里红"
+									singerPics.src="imgs/qi.png"
+									gecispan.innerHTML="<p>"+"又见山里红<br>词曲：刘海东 <br>演唱：祁隆 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>那是你秋天依恋的风 <br>那是你漫山醉人的红 <br>那是你含情脉脉的心 <br>酸酸甜甜招人疼 <br>你是我一片思乡的情 <br>你是我童年最真的梦 <br>你是我藏在心中的歌 <br>今天唱给你来听 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情< <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月 <br>融化在我心中 <br>又见山里红 <br>久别的山里红 <br>你把太阳的色彩 <br>浓缩成故乡情 <br>又见山里红 <br>故乡的山里红 <br>你把燃烧的岁月  <br>融化在我心中 <br>你把燃烧的岁月 <br>融化在我心中<br>"+"</p>"
+							  break;
+							}
+	 		
+	 	}
+	 }
+
+
+ 	
+	 
+	},10)
+					audio.play()
+				}
+			 			for(var i=0;i<2;i++){
+			bofangjiantou[i].style.display="inline-block"
+			}
+			
+			bofanganiu.style.display="inline-block"
+			for(var i=0;i<2;i++){
+			bofangjiantou2[i].style.display="none"
+			}
+			
+			bofanganiu22.style.display="none"
+			songsDivUl.style.display="block"
+			fmChannels.style.display="none"
+			singerPics.style.display="block"
+					songName.style.display="none"
+				songAuthor.style.display="none"
+				songImg.style.display="none"
+					geci.style.display="block"
+						songsname.style.display="inline-block"
+						time.style.display="inline-block"
+						time2.style.display="inline-block"
+
+			 }
+
+
+			songsOptionsFM.onclick=function(){
+				audio.pause()
+				jindutiao.style.display="none"
+				jindutiao2.style.display="inline-block"
+
+				if(bofanganiu22.className=="bofanganiu22"){
+					player.pause()
+				}else if(bofanganiu22.className=="bofanganiu22 bofanganiu2")
+				{
+					player.play()
+				}
+			 
+				songsDivUl.style.display="none"
+			fmChannels.style.display="block"
+			 songImg.style.display="block"
+				singerPics.style.display="none"
+				geci.style.display="none"
+				songsname.style.display="none"
+				songName.style.display="block"
+				songAuthor.style.display="block"
+				songsDivUl.style.display="none"
+						clearInterval(timer)
+				clearInterval(fmTimer)
+				fmTimer=setInterval(function(){
+				time.innerHTML=Math.floor(player.currentTime/60)+":"+(player.currentTime%60/100).toFixed(2).slice(-2);
+				time2.innerHTML="/"+Math.floor( player.duration/60)+":"+( player.duration%60/100).toFixed(2).slice(-2);
+
+					jindutiao2i.style.left=player.currentTime/player.duration*450+"px";
+	
+
+				}
+
+
+				,10)
+			for(var i=0;i<2;i++){
+			bofangjiantou[i].style.display="none"
+			}
+			
+			bofanganiu.style.display="none"
+			for(var i=0;i<2;i++){
+			bofangjiantou2[i].style.display="inline-block"
+			}
+			
+			bofanganiu22.style.display="inline-block"
+			
+			}
+
+
+
+
+			bofanganiu22.onclick=function(){
+				if(bofanganiu22.className=="bofanganiu22"){
+				player.play()
+			 
+				
+			
+				bofanganiu22.className="bofanganiu22 bofanganiu2"
+			}
+				else if(bofanganiu22.className=="bofanganiu22 bofanganiu2"){
+						player.pause()
+						bofanganiu22.className="bofanganiu22"
+				}
+			}
+
+				jindutiao2.onclick=function(event){
+		 	 	var e = event || window.event;
+		 	 	 player.pause()
+		 	 	 bofanganiu22.className="bofanganiu22 bofanganiu2"
+	       		jindutiao2i.style.left=event.clientX-354+"px"
+      			 // 设置currentTime
+      			   player.currentTime=(event.clientX-354)/449*player.duration
+      			    	 	 player.play()
+ 				 clearInterval(fmTimer)
+ 				 fmTimer=setInterval(function(){
+ 				 time.innerHTML=Math.floor(player.currentTime/60)+":"+(player.currentTime%60/100).toFixed(2).slice(-2);
+				time2.innerHTML="/"+Math.floor( player.duration/60)+":"+( player.duration%60/100).toFixed(2).slice(-2);
+
+					jindutiao2i.style.left=player.currentTime/player.duration*450+"px";
+	
+
+				}
+							,10)
+
+ 				}
+ 				// 登陆
+ 		
+
+</script>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?9eed43299d1e6adec7323109f27f202b";
+        var s = document.getElementsByTagName("script")[0];
+        
+    })();
+    </script>
+<script type="text/javascript">
+  !(function($, window, document) {
+
+    function Music() {
+        this._init();
+    }
+
+    Music.prototype = {
+
+        _init: function() {
+            var _this = this;
+            //alert(_this.readChannel("channel_id"));
+            this.dom();
+            this.getSong(_this.readChannel("channel_id"));
+            this.getChannel();
+            this.bindEvent();
+       
+        },
+
+        dom: function() {
+            this.w = $(window).innerWidth();
+            this.h = $(window).innerHeight();
+            this.play = true;
+            this.player = $("#player");
+            this.canNextPlay = true;
+            this.$channel_title = $(".channel-title span");
+            this.$lrc_main = $(".lrc-main");
+        },
+
+        bindEvent: function() {
+            var _this = this;
+            var controlPlay = false;
+            var voiceOff = false;
+ 
+        
+
+            //自动播放
+            this.player.on("ended", function() {
+                console.log("播放完成");
+                $(".item-next a").trigger("click");
+            });
+
+            //设置音量
+          
+
+            //下一首
+            $(".bofangjiantou2").on("click", function() {
+                if (_this.canNextPlay) {
+                    _this.getSong($(".channel-title").attr("data-channels"));
+                 player.autoplay="autoplay" 
+                 
+                  $(".bofanganiu22").attr("class","bofanganiu22 bofanganiu2");
+                }
+            });
+ 
+            
+
+           
+        },
+
+        //获取音乐
+        getSong: function(channel) {
+            var _this = this;
+            _this.canNextPlay = false;
+            $.ajax({
+                url: "http://api.jirengu.com/fm/getSong.php",
+                type: "get",
+                dataType: "json",
+                data: {
+                    channel: channel || "public_shiguang_jingdianlaoge",
+                    'version': 100,
+                    type: "n",
+                },
+                success: function(data) {
+
+                    var data = data.song[0];
+                    _this.player.attr("src", data.url);
+                    if (data.picture) {
+                        $(".song-img img").attr("src", data.picture);
+                    }
+
+                    //设置音乐名称
+                    $(".songName").text(data.title);
+                    //艺术家
+                    $(".songAuthor").text(data.artist);
+
+                    _this.$channel_title.text(_this.readChannel("channel_text") || "经典老歌");
+                    _this.$channel_title.parent().attr("data-channels", _this.readChannel("channel_id") || "public_shiguang_jingdianlaoge");
+
+                    document.title = data.title + " - " + data.artist + " - 正在播放";
+                    //控制音乐相关;
+                    _this.player.on("canplay", function() {
+                        _this.canNextPlay = true;
+                        //初始化音乐时间
+                        var time = _this.player[0].duration;
+                        var currentTime, mm, ss;
+                        mm = Math.floor(time / 60);
+                        mm = mm < 10 ? "0" + mm : mm;
+                        ss = Math.floor(time % 60);
+                        ss = ss < 10 ? "0" + ss : ss;
+                        $(".total-time").text(mm + ":" + ss);
+                    });
+
+                    //获取歌词
+                    _this.getLrc(data.sid);
+                }
+            });
+        },
+
+        //获取频道
+        getChannel: function() {
+            var _this = this;
+            $.ajax({
+                url: "http://api.jirengu.com/fm/getChannels.php",
+                dataType: "json",
+                success: function(data) {
+                    var data = data.channels ? data.channels : [],
+                        html = "",
+                        num = 5,
+                        length = data.length,
+                        rows = Math.floor(length / 5); //8
+                    //渲染频道列表
+                    for (var k = 0; k < num; k++) {
+                        html = "";
+                        for (var i = rows * k; i < (rows * (k + 1)); i++) {
+                            html += '<dd class="channel-dd" data-channels="' + data[i].channel_id + '">' + data[i].name + '</dd>';
+                        }
+                        $(".dl-" + k).append(html);
+                    }
+
+                    //选专辑
+                    $(".channel-dd").click(function() {
+                        var channels = $(this).attr("data-channels"),
+                            text = $(this).text();
+                        $(".channel-dd").removeClass('active').find("span").remove();
+                        $(this).addClass('active').append("<span>");
+                        _this.$channel_title.text(text).attr({ "data-channels": channels });
+                        _this.getSong($(this).attr("data-channels"));
+                        //存储频道信息
+                        _this.sendChannel("channel_text", text);
+                        _this.sendChannel("channel_id", channels);
+                      player.autoplay="autoplay" 
+                 
+                  $(".bofanganiu22").attr("class","bofanganiu22 bofanganiu2");
+                    });
+
+                    //遍历默认频道
+                    $(".channel-dd").each(function() {
+                        console.log(_this.$channel_title.text());
+                        if ($(this).text() == _this.$channel_title.text()) {
+                            $(this).addClass('active').append($("<span>"));
+                        }
+                    })
+                }
+            })
+        },
+
+        //获取歌词
+        getLrc: function(sid) {
+            var _this = this;
+            $.ajax({
+                url: "http://api.jirengu.com/fm/getLyric.php",
+                dataType: "json",
+                data: {
+                    sid: sid
+                },
+                success: function(data) {
+                 
+
+                    //播放进度
+                    _this.player.off("timeupdate").on("timeupdate", function() {
+                        var currentTime = _this.player[0].currentTime;
+                        var time = _this.player[0].duration;
+                        $(".progress-time").css({ width: Math.floor((currentTime / time) * 100) + '%' });
+                        var mm = Math.floor(currentTime / 60);
+                        var ss = Math.floor(currentTime % 60);
+                        mm = mm < 10 ? "0" + mm : mm;
+                        ss = ss < 10 ? "0" + ss : ss;
+                        $(".play-time").text(mm + ":" + ss);
+                        _this.lrcMove(currentTime);
+                    });
+                }
+            })
+        },
+
+    
+ 
+        lrcMove: function(currentTime) {
+            
+        
+        },
+
+        //本地存储；
+        sendChannel: function(key, value) {
+            localStorage.setItem(key, value);
+        },
+
+        //读取存储
+        readChannel: function(key) {
+            return localStorage.getItem(key);
+
+        },
+
+        //读取音量
+      
+    }
+
+    //生成一个实例
+    new Music();
+})(jQuery, window, document)
+
+
+	 
+		
+// 收藏
+$(".img-container").on("dragover", function (event) {
+    event.preventDefault();
+})
+ 
+.on("drop", function(event) {
+    event.preventDefault();
+    // 数据在event的dataTransfer对象里
+    var file = event.originalEvent.dataTransfer.files[0];
+ 
+     if(file.name=="1.mp3"){
+      $(".songs").eq(0).trigger("onclick") 
+    }
+    if(file.name=="2.mp3"){
+      $(".songs").eq(1).trigger("onclick") 
+    }
+    if(file.name=="3.mp3"){
+      $(".songs").eq(2).trigger("onclick") 
+    }
+    if(file.name=="4.mp3"){
+      $(".songs").eq(3).trigger("onclick") 
+    }
+    if(file.name=="5.mp3"){
+      $(".songs").eq(4).trigger("onclick") 
+    }
+   
+ 	 
+  
+})
+
+$(".file").on("change",function(e){
+	 
+
+ var file=e.currentTarget.files[0] 
+  console.log(window.URL.createObjectURL(file))
+   if(file.name=="1.mp3"){
+      $(".songs").eq(0).trigger("onclick") 
+    }
+    if(file.name=="2.mp3"){
+      $(".songs").eq(1).trigger("onclick") 
+    }
+    if(file.name=="3.mp3"){
+      $(".songs").eq(2).trigger("onclick") 
+    }
+    if(file.name=="4.mp3"){
+      $(".songs").eq(3).trigger("onclick") 
+    }
+    if(file.name=="5.mp3"){
+      $(".songs").eq(4).trigger("onclick") 
+    }
+   
+ 	 
+  
+})
+
+ 
+ 
+</script>
+
+
+</body>
+</html>
